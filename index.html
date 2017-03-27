@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Ember 1.8.1 example</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link href="style.css" rel="stylesheet">
+
+    <script src="http://code.jquery.com/jquery-2.1.0.js"></script>
+    <script src="http://builds.handlebarsjs.com.s3.amazonaws.com/handlebars-v1.3.0.js"></script>
+    <script src="http://builds.emberjs.com/tags/v1.8.1/ember.js"></script>
+
+    <script>
+      App = Ember.Application.create({
+        rootElement: '#app',
+      });
+
+      App.Router.map(function() {
+      });
+
+      App.ApplicationController = Ember.Controller.extend({
+        tableData: [
+          {
+            title: 'Mobile UI Design for Beginners: Grids',
+            label: 'S',
+            price: '$6'
+          },
+          {
+            title: 'How to Print PowerPoint Slides With Notes in 60 Seconds',
+            label: 'S',
+            price: '$3'
+          },
+        ],
+      });
+
+      App.PanelView = Ember.View.extend({
+        templateName: 'panel',
+        classNames: [ 'panel' ],
+
+        contentVisible: true,
+
+        panelHeaderView: Ember.View.create({
+          templateName: 'panel-header',
+          classNames: [ 'panel-header' ],
+
+          click: function() {
+            this.toggleProperty('parentView.contentVisible');
+          }
+        }),
+
+        panelContentView: Ember.View.create({
+          templateName: 'panel-content',
+          classNames: [ 'panel-content' ],
+
+          isVisibleBinding: 'parentView.contentVisible'
+        })
+      });
+    </script>
+
+    <script type="text/x-handlebars">
+      {{view App.PanelView title="March 2017" price="$9" tableData=tableData}}
+    </script>
+
+    <script type="text/x-handlebars" data-template-name="panel">
+      {{view view.panelHeaderView}}
+
+      {{view view.panelContentView}}
+    </script>
+
+    <script type="text/x-handlebars" data-template-name="panel-header">
+      <h2>{{view.parentView.title}} <span class="pull-right">{{view.parentView.price}}</span></h2>
+    </script>
+
+    <script type="text/x-handlebars" data-template-name="panel-content">
+      <table class="table table-striped">
+        <tbody>
+          {{#each row in view.parentView.tableData}}
+            <tr>
+              <td class="col-xs-10">{{row.title}}</td>
+              <td class="col-xs-1">
+                <span class="label label-info">{{row.label}}</span>
+              </td>
+              <td class="col-xs-1">{{row.price}}</td>
+            </tr>
+          {{/each}}
+        </tbody>
+      </table>
+    </script>
+  </head>
+  <body>
+    <div id="app"></div>
+  </body>
+</html>

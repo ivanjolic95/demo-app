@@ -1,0 +1,38 @@
+body {
+  font-family: 'Roboto', sans-serif;
+  padding: 20px;
+}
+
+.panel .panel-header {
+  cursor: pointer;
+}
+
+.panel .panel-header h2 {
+  margin: 0;
+  padding-bottom: 20px;
+  border-bottom: 2px solid #FF6E5E;
+  color: #FF6E5E;
+  font-size: 25px;
+  font-weight: 600;
+}
+
+.panel .panel-header h2 .pull-right {
+  float: right;
+  padding-right: 80px;
+}
+
+.panel .panel-content {
+  color: #4e4e4e;
+  font-size: 25px;
+  font-weight: 300;
+}
+
+.panel .panel-content .table-striped>tbody>tr:nth-of-type(odd) {
+  background-color: #F5F5F5;
+}
+
+.panel .panel-content .label-info {
+  position: relative;
+  top: -3px;
+  background-color: #C0C0C0;
+}
